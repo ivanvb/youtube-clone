@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Login from './pages/Login/Login';
 
 function App() {
     const [data, setData] = useState(null);
@@ -11,7 +12,7 @@ function App() {
         }
         fetchData();
     }, []);
-    return <div>{<p>{data || 'Loading . . .'}</p>}</div>;
+    return <Login />;
 }
 
 export default App;
