@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './pages/Login/Login';
+import SignUp from './pages/SignUp/SignUp';
 
 function App() {
-    const [data, setData] = useState(null);
-
-    useEffect(() => {
-        async function fetchData() {
-            const fetchedData = await fetch('/api/');
-            const json = await fetchedData.json();
-            setData(json.hello);
-        }
-        fetchData();
-    }, []);
-    return <Login />;
+    return (
+        <Router>
+            <Switch>
+                <Route path="/" exact component={Login} />
+                <Route path="/login" exact component={Login} />
+                <Route path="/signup" exact component={SignUp} />
+            </Switch>
+        </Router>
+    );
 }
 
 export default App;
