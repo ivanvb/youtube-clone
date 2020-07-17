@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import LikeIcon from '../../icons/LikeIcon';
 
 const metadata = {
     videoUrl: 'http://d864jpdslrchw.cloudfront.net/d/d-720p.mp4',
@@ -41,9 +42,15 @@ const Video = () => {
                     <p className="text-xs">{subscribers} subscribers</p>
                     <p className="text-xs text-red-600 uppercase">Subscribe</p>
                 </div>
-                <div className="flex ml-auto">
-                    <span className="mx-2">{likes} Likes</span>
-                    <span className="mx-2">{dislikes} Dislikes</span>
+                <div className="flex ml-auto text-sm">
+                    <span className="mx-2 flex align-baseline">
+                        <LikeIcon className="h-4 w-4 mt-1 mr-2" />
+                        {likes}
+                    </span>
+                    <span className="mx-2 flex ml-auto text-sm">
+                        <LikeIcon className="h-4 w-4 mt-1 mr-2 transform rotate-180" />
+                        {dislikes}
+                    </span>
                 </div>
             </div>
             <h3 className="font-bold mt-4">Description</h3>
