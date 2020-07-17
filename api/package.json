@@ -4,6 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "faker": "^4.1.0"
+    "aws-sdk": "^2.714.2",
+    "faker": "^4.1.0",
+    "mongoose": "^5.9.24"
   }
 }

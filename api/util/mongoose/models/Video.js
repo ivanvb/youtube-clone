@@ -9,7 +9,7 @@ const VideoSchema = new Schema({
 	likes: Number,
 	dislikes: Number,
 	length: Number,
-	uploadDate: new Date(),
+	uploadDate: Date,
 	views: Number,
 });
 
