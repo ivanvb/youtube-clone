@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import Login from './pages/Login/Login';
 import SignUp from './pages/SignUp/SignUp';
 import Home from './pages/Home/Home';
+import Profile from './pages/Profile/Profile';
 import Layout from './components/Layout/index';
 
 const LobbyRouter = () => {
@@ -23,6 +24,7 @@ const AppRouter = () => {
             <Layout>
                 <Switch>
                     <Route path="/" exact component={Home} />
+                    <Route path="/profile" exact component={Profile} />
                     <Redirect to={'/'} />
                 </Switch>
             </Layout>

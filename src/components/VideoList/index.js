@@ -5,10 +5,10 @@ const VideoList = ({ videos, className }) => {
     return (
         <div className={`${className}`}>
             {videos.map((video, i) => (
-                <>
-                    <FeedVideo {...video} key={i} />
+                <React.Fragment key={i}>
+                    <FeedVideo {...video} />
                     {i < videos.length - 1 ? <hr className="my-4"></hr> : ''}
-                </>
+                </React.Fragment>
             ))}
         </div>
     );

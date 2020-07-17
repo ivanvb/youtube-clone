@@ -12,7 +12,7 @@ const FeedVideo = ({
     hideChannel,
 }) => {
     return (
-        <div className={`${className} relative`}>
+        <div className={`${className} relative w-full`}>
             {hideChannel ? (
                 ''
             ) : (
@@ -21,7 +21,7 @@ const FeedVideo = ({
                     <span className="ml-3 font-bold">{channelName}</span>
                 </a>
             )}
-            <a href="#" className="flex mt-2">
+            <a href="#" className={`flex ${hideChannel ? '' : 'mt-2'}`}>
                 <div className="relative h-24 w-48 md:h-32 md:w-64">
                     <img src={img} alt={title} className="h-24 w-48 md:h-32 md:w-64 object-cover" />
                     <span className="absolute bottom-0 py-1 px-1 my-2 mx-2 bg-black text-white text-xs rounded-sm right-0 opacity-75">
