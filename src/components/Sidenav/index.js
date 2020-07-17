@@ -30,8 +30,8 @@ const Sidenav = ({ isOpen, className }) => {
         >
             <ul className="text-sm">
                 {routes.map((route, i) => (
-                    <li className="py-2 hover:bg-gray-200" key={i}>
-                        <Link className="pl-4 flex items-center" to={route.link}>
+                    <li className="hover:bg-gray-200" key={i}>
+                        <Link className="pl-4 py-2 flex items-center" to={route.link}>
                             {route.icon}
                             <span className="ml-2">{route.name}</span>
                         </Link>

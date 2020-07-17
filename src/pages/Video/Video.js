@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import LikeIcon from '../../icons/LikeIcon';
 
 const metadata = {
-    videoUrl: 'http://d864jpdslrchw.cloudfront.net/d/d-720p.mp4',
+    videoUrl: 'https://d864jpdslrchw.cloudfront.net/d/d-720p.mp4',
     channelImg: 'https://avatars1.githubusercontent.com/u/33399537?s=400&v=4',
     channelName: 'Channel 01',
     subscribers: 12,

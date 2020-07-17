@@ -6,6 +6,7 @@ import Home from './pages/Home/Home';
 import Profile from './pages/Profile/Profile';
 import Layout from './components/Layout/index';
 import Video from './pages/Video/Video';
+import Search from './pages/Search/Search';
 
 const LobbyRouter = () => {
     return (
@@ -27,6 +28,7 @@ const AppRouter = () => {
                     <Route path="/" exact component={Home} />
                     <Route path="/profile" exact component={Profile} />
                     <Route path="/video" exact component={Video} />
+                    <Route path="/search" exact component={Search} />
                     <Redirect to={'/'} />
                 </Switch>
             </Layout>
