@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import LikeIcon from '../../icons/LikeIcon';
 
 const metadata = {
-    videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
+    videoUrl: 'https://d864jpdslrchw.cloudfront.net/d/d-720p.mp4',
     channelImg: 'https://avatars1.githubusercontent.com/u/33399537?s=400&v=4',
     channelName: 'Channel 01',
     subscribers: 12,
@@ -30,7 +31,7 @@ const Video = () => {
             <video
                 src={videoUrl}
                 controls
-                className="w-full h-48 md:h-96 h-64 mt-4 my-2 object-contain bg-black"
+                className="w-full h-48 md:h-96 mt-4 my-2 object-contain bg-black"
             />
             <div className="flex items-center mt-4">
                 <Link to="/profile">
@@ -41,9 +42,15 @@ const Video = () => {
                     <p className="text-xs">{subscribers} subscribers</p>
                     <p className="text-xs text-red-600 uppercase">Subscribe</p>
                 </div>
-                <div className="flex ml-auto">
-                    <span className="mx-2">{likes} Likes</span>
-                    <span className="mx-2">{dislikes} Dislikes</span>
+                <div className="flex ml-auto text-sm">
+                    <span className="mx-2 flex align-baseline">
+                        <LikeIcon className="h-4 w-4 mt-1 mr-2" />
+                        {likes}
+                    </span>
+                    <span className="mx-2 flex ml-auto text-sm">
+                        <LikeIcon className="h-4 w-4 mt-1 mr-2 transform rotate-180" />
+                        {dislikes}
+                    </span>
                 </div>
             </div>
             <h3 className="font-bold mt-4">Description</h3>

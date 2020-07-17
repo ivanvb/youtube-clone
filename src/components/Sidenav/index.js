@@ -1,19 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import LikeIcon from '../../icons/LikeIcon';
+import RecentIcon from '../../icons/RecentIcon';
+import SubscriptionsIcon from '../../icons/SubscriptionsIcon';
 
 const Sidenav = ({ isOpen, className }) => {
     const routes = [
         {
             name: 'Recent',
             link: '/',
+            icon: <RecentIcon className="h-4 w-4" />,
         },
         {
             name: 'Subscriptions',
             link: '/',
+            icon: <SubscriptionsIcon className="h-4 w-4" />,
         },
         {
             name: 'Liked Videos',
             link: '/',
+            icon: <LikeIcon className="h-4 w-4" />,
         },
     ];
     return (
@@ -24,9 +30,10 @@ const Sidenav = ({ isOpen, className }) => {
         >
             <ul className="text-sm">
                 {routes.map((route, i) => (
-                    <li className="py-2 hover:bg-gray-200" key={i}>
-                        <Link className="pl-6 block" to={route.link}>
-                            {route.name}
+                    <li className="hover:bg-gray-200" key={i}>
+                        <Link className="pl-4 py-2 flex items-center" to={route.link}>
+                            {route.icon}
+                            <span className="ml-2">{route.name}</span>
                         </Link>
                     </li>
                 ))}

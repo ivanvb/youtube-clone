@@ -15,7 +15,7 @@ const Home = () => {
         duration: '11:04',
     };
     return (
-        <div className="px-0 md:px-16 pb-8">
+        <div className="px-2 md:px-8 pb-8">
             <VideoList videos={new Array(10).fill(0).map((_) => video)} />
         </div>
     );
