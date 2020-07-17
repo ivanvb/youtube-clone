@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const FeedVideo = ({
     className,
@@ -16,12 +17,12 @@ const FeedVideo = ({
             {hideChannel ? (
                 ''
             ) : (
-                <a href="#" className="flex items-center">
+                <Link to="/profile" className="flex items-center">
                     <img src={img} alt={channelName} className="h-10 w-10 rounded-full" />
                     <span className="ml-3 font-bold">{channelName}</span>
-                </a>
+                </Link>
             )}
-            <a href="#" className={`flex ${hideChannel ? '' : 'mt-2'}`}>
+            <Link to="/video" className={`flex ${hideChannel ? '' : 'mt-2'}`}>
                 <div className="relative h-24 w-48 md:h-32 md:w-64">
                     <img src={img} alt={title} className="h-24 w-48 md:h-32 md:w-64 object-cover" />
                     <span className="absolute bottom-0 py-1 px-1 my-2 mx-2 bg-black text-white text-xs rounded-sm right-0 opacity-75">
@@ -36,7 +37,7 @@ const FeedVideo = ({
                     </p>
                     <p className="text-gray-700 text-xs clamp-2 mt-2">{description}</p>
                 </div>
-            </a>
+            </Link>
         </div>
     );
 };

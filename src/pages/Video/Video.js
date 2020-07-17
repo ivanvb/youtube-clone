@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 const metadata = {
     videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
     channelImg: 'https://avatars1.githubusercontent.com/u/33399537?s=400&v=4',
@@ -31,7 +33,9 @@ const Video = () => {
                 className="w-full h-48 md:h-96 h-64 mt-4 my-2 object-contain bg-black"
             />
             <div className="flex items-center mt-4">
-                <img src={channelImg} className="h-16 w-16 rounded-full" />
+                <Link to="/profile">
+                    <img src={channelImg} className="h-16 w-16 rounded-full" />
+                </Link>
                 <div className="ml-4">
                     <h2 className="font-bold">{channelName}</h2>
                     <p className="text-xs">{subscribers} subscribers</p>
