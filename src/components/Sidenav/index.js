@@ -5,7 +5,7 @@ const Sidenav = ({ isOpen, className }) => {
         <nav
             className={`transform mt-8 pt-2 ${className} ${
                 isOpen ? 'translate-x-0' : '-translate-x-full'
-            } md:translate-x-0 fixed md:fixed h-full w-5/12 md:w-2/12 bg-white transition duration-500 transition-transform`}
+            } md:translate-x-0 fixed md:fixed h-full w-5/12 md:w-2/12 bg-white transition duration-500 transition-transform z-10`}
         >
             <ul className="pl-6 text-sm">
                 <li className="pt-2 cursor-pointer">Recent</li>

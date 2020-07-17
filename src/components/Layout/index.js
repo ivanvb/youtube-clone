@@ -9,7 +9,7 @@ const Home = ({ children }) => {
         <div className="relative w-full h-full">
             <Navbar />
             <div
-                className="absolute left-0 ml-4 block md:hidden mt-3 cursor-pointer"
+                className="fixed left-0 ml-4 block md:hidden mt-3 cursor-pointer z-30"
                 onClick={() => {
                     setOpen((prev) => !prev);
                 }}
