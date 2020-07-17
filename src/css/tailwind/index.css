@@ -31,3 +31,24 @@ body,
 body {
     font-family: 'Roboto', Arial, Helvetica, sans-serif !important;
 }
+
+[type='file'] {
+    display: none;
+}
+
+[type='file'] ~ label {
+    position: relative;
+}
+
+[type='file'] ~ label::after {
+    content: attr(content);
+    height: 16rem;
+    width: 100%;
+    background: gray;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}

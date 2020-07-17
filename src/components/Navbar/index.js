@@ -12,7 +12,7 @@ const Navbar = () => {
             </Link>
             <SearchBar className="mx-2 md:mx-12 lg:mx-32" />
             <ul className="flex">
-                <Link to="/" className="mr-3">
+                <Link to="/upload" className="mr-3">
                     <UploadIcon />
                 </Link>
                 <Link to="/profile" className="h-6 w-6 rounded-full overflow-hidden">

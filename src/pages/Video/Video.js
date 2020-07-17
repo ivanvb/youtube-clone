@@ -31,7 +31,7 @@ const Video = () => {
             <video
                 src={videoUrl}
                 controls
-                className="w-full h-48 md:h-96 h-64 mt-4 my-2 object-contain bg-black"
+                className="w-full h-48 md:h-96 mt-4 my-2 object-contain bg-black"
             />
             <div className="flex items-center mt-4">
                 <Link to="/profile">

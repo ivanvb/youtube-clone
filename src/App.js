@@ -7,6 +7,7 @@ import Profile from './pages/Profile/Profile';
 import Layout from './components/Layout/index';
 import Video from './pages/Video/Video';
 import Search from './pages/Search/Search';
+import Upload from './pages/Upload/Upload';
 
 const LobbyRouter = () => {
     return (
@@ -29,6 +30,7 @@ const AppRouter = () => {
                     <Route path="/profile" exact component={Profile} />
                     <Route path="/video" exact component={Video} />
                     <Route path="/search" exact component={Search} />
+                    <Route path="/upload" exact component={Upload} />
                     <Redirect to={'/'} />
                 </Switch>
             </Layout>
