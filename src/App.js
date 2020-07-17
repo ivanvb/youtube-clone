@@ -34,7 +34,7 @@ const AppRouter = () => {
     );
 };
 function App() {
-    const isLogged = true;
+    const isLogged = false;
 
     return isLogged ? <AppRouter /> : <LobbyRouter />;
 }

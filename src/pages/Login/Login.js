@@ -3,6 +3,7 @@ import Heading1 from '../../components/Heading1/index';
 import InputField from '../../components/InputField/index';
 import Button from '../../components/Button/index';
 import LobbyContainer from '../../components/LobbyContainer/index';
+import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
     return (
@@ -13,7 +14,10 @@ const LoginForm = () => {
             <InputField type="password" placeholder="Password" className="mb-4" />
             <Button>Login</Button>
             <p className="absolute bottom-0 mb-6">
-                Don't have an account? <span className="font-bold">Sign Up</span>
+                Don't have an account?{' '}
+                <Link to="/signup" className="font-bold">
+                    Sign Up
+                </Link>
             </p>
         </>
     );
