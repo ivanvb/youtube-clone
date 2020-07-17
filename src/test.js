@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function Test() {
 	const [data, setData] = useState(null);
 	const [quality, setQuality] = useState('480p');
 	const [link, setLink] = useState();
 	const [image, setImage] = useState();
-	const [result, setResult] = useState();
 
 	useEffect(() => {
 		async function fetchData() {
@@ -17,56 +17,62 @@ function Test() {
 	}, []);
 
 	useEffect(() => {
-		setLink(`http://d864jpdslrchw.cloudfront.net/a/a.mp4`);
+		setLink(`http://d864jpdslrchw.cloudfront.net/5f1210ddd747e90a04f705ce/${quality}.mp4`);
 	}, [quality]);
 
 	const handleChange = event => {
 		setImage(event.target.files[0]);
 	};
 
-	function getBase64(file, cb) {
-		let reader = new FileReader();
-		reader.readAsDataURL(file);
-		reader.onload = function () {
-			cb(reader.result);
-		};
-		reader.onerror = function (error) {
-			console.log('Error: ', error);
-		};
-	}
 	async function handleClick(e) {
 		e.preventDefault();
 
 		console.log(image);
-
-		getBase64(image, res => {
-			setResult(res);
-		});
-
-		console.log(result);
-		/*const formData = new FormData();
-		formData.append('image', image);
-
-		formData.append('1', '1');
-		formData.append('2', '2');
-		/*
-		formData.append("position", form.position);
-		formData.append("description", form.description);
-		formData.append("type", form.type);
-		formData.append("email", form.email);
-		formData.append("howToApply", form.instructions);
-		formData.append("category", categoryName[0]._id);
-		formData.append("createdBy", user._id);
-
-		const x = await fetch('/api/upload', {
-			method: 'POST',
+		const jsonHeader = {
 			headers: {
-				'Content-Type': 'application/octet-stream',
+				'Content-Type': 'application/json',
 			},
-			body: formData,
-		});
-		const y = await x.body;
-		console.log(y);*/
+		};
+
+		const body = {
+			title: 'Final Final Sample Video',
+			description: 'My Description4',
+			tags: ['Funny', 'Comedy', 'Vlog'],
+			likes: 502,
+			dislikes: 155,
+			length: 750,
+			uploadDate: new Date(),
+			views: 3589,
+		};
+
+		const dbEntry = await axios.post('/api/create-video', body, jsonHeader);
+
+		const dbResult = dbEntry.data;
+
+		const info = {
+			fileName: dbResult._id,
+			fileType: image.name.split('.')[1],
+		};
+		const putHeader = {
+			headers: {
+				'Content-Type': info.fileType,
+			},
+		};
+
+		const signedRequest = await axios.post('/api/signed-request', info, jsonHeader);
+
+		const result = signedRequest.data;
+		console.log(result);
+
+		const putObject = await axios.put(result.signedRequest, image, putHeader);
+
+		const s3Result = putObject.data;
+		console.log(s3Result);
+
+		const transcode = await axios.post('/api/transcode', info, jsonHeader);
+
+		const transcodedResult = transcode.data;
+		console.log(transcodedResult);
 	}
 	return (
 		<div>
@@ -84,11 +90,13 @@ function Test() {
 			<img
 				style={{ height: '40%', width: '40%' }}
 				alt='test-image'
-				src='http://d864jpdslrchw.cloudfront.net/d/Thumbnail00001.png'
+				src='http://d864jpdslrchw.cloudfront.net/5f1210ddd747e90a04f705ce/thumbnail-00001.png'
 			/>
 			<h4>Upload your video: </h4>
-
-			<button onClick={handleClick}>Submit</button>
+			<input style={{ display: 'block' }} onChange={handleChange} type='file' accept='video/mp4' />
+			<button style={{ display: 'block' }} onClick={handleClick}>
+				Submit
+			</button>
 		</div>
 	);
 }
