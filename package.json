@@ -6,15 +6,21 @@
         "@testing-library/jest-dom": "^4.2.4",
         "@testing-library/react": "^9.3.2",
         "@testing-library/user-event": "^7.1.2",
-        "faker": "^4.1.0",
-        "mongoose": "^5.9.24",
+        "axios": "^0.19.2",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
-        "react-scripts": "3.4.1"
+        "react-redux": "^7.2.0",
+        "react-router-dom": "^5.2.0",
+        "react-scripts": "3.4.1",
+        "redux": "^4.0.5",
+        "redux-thunk": "^2.3.0",
+        "tailwindcss": "^1.5.1"
     },
     "scripts": {
+        "build:css": "postcss src/css/tailwind/index.css -o src/css/tailwind/tailwind.build.css",
+        "watch:css": "postcss src/css/tailwind/index.css -o src/css/tailwind/tailwind.build.css -w",
         "start": "react-scripts start",
-        "build": "react-scripts build",
+        "build": "yarn build:css && react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "now-build": "yarn build"
@@ -31,5 +37,9 @@
             "last 1 safari version"
         ]
     },
-    "proxy": "http://localhost:3000"
+    "proxy": "http://localhost:3000",
+    "devDependencies": {
+        "autoprefixer": "^9.8.5",
+        "postcss-cli": "^7.1.1"
+    }
 }

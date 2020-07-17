@@ -1,0 +1,33 @@
+@tailwind base;
+
+@tailwind components;
+
+html,
+body,
+#root {
+    height: 100%;
+}
+
+.h-90 {
+    height: 90%;
+}
+
+.absolute-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@tailwind utilities;
+
+.clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+body {
+    font-family: 'Roboto', Arial, Helvetica, sans-serif !important;
+}
