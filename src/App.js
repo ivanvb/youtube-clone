@@ -5,6 +5,7 @@ import SignUp from './pages/SignUp/SignUp';
 import Home from './pages/Home/Home';
 import Profile from './pages/Profile/Profile';
 import Layout from './components/Layout/index';
+import Video from './pages/Video/Video';
 
 const LobbyRouter = () => {
     return (
@@ -25,6 +26,7 @@ const AppRouter = () => {
                 <Switch>
                     <Route path="/" exact component={Home} />
                     <Route path="/profile" exact component={Profile} />
+                    <Route path="/video" exact component={Video} />
                     <Redirect to={'/'} />
                 </Switch>
             </Layout>
