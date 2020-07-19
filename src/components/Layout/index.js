@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Navbar from '../Navbar/index';
 import Sidenav from '../Sidenav/index';
+import MenuIcon from '../../icons/Menu';
+import CloseIcon from '../../icons/Close';
 
 const Home = ({ children }) => {
     const [open, setOpen] = useState(false);
@@ -9,12 +11,16 @@ const Home = ({ children }) => {
         <div className="relative w-full h-full">
             <Navbar />
             <div
-                className="fixed left-0 ml-4 block md:hidden mt-3 cursor-pointer z-30"
+                className="fixed left-0 ml-1 block md:hidden mt-3 cursor-pointer z-30"
                 onClick={() => {
                     setOpen((prev) => !prev);
                 }}
             >
-                X
+                {open ? (
+                    <CloseIcon className="text-black h-6 w-6" />
+                ) : (
+                    <MenuIcon className="text-black h-6 w-6" />
+                )}
             </div>
             <div className="flex h-full">
                 <Sidenav isOpen={open} className="mt-12 bg-white shadow-md" />

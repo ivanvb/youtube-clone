@@ -38,6 +38,11 @@ const Sidenav = ({ isOpen, className }) => {
                     </li>
                 ))}
             </ul>
+            <hr className="mx-2 mt-2"></hr>
+            <h3>Subscriptions</h3>
+            <ul>
+                <li></li>
+            </ul>
         </nav>
     );
 };
