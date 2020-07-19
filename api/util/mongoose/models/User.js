@@ -8,6 +8,7 @@ const UserSchema = new Schema({
 	name: String,
 	username: String,
 	videos: String,
+	uploadedVideos: [Video],
 	subscriptions: [User],
 	likes: [Video],
 	dislikes: [Video],
