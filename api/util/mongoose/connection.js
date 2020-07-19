@@ -5,3 +5,4 @@ mongoose.connect(process.env.dbURL, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 });
+mongoose.set('useFindAndModify', false);

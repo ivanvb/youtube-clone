@@ -1,17 +1,16 @@
 const mongoose = require('mongoose');
-const Video = require('./Video');
 require('../connection');
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-	email: String, // String is shorthand for {type: String}
+	email: String,
 	name: String,
 	username: String,
 	videos: String,
-	uploadedVideos: [Video],
-	subscriptions: [User],
-	likes: [Video],
-	dislikes: [Video],
+	uploadedVideos: { type: [mongoose.Schema.Types.ObjectID], ref: 'video' },
+	subscriptions: { type: [mongoose.Schema.Types.ObjectID], ref: 'user' },
+	likes: { type: [mongoose.Schema.Types.ObjectID], ref: 'video' },
+	dislikes: { type: [mongoose.Schema.Types.ObjectID], ref: 'video' },
 	subscribers: Number,
 });
 

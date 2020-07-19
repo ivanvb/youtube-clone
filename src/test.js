@@ -1,101 +1,50 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import axios from 'axios';
 
 function Test() {
-	const [data, setData] = useState(null);
-	const [quality, setQuality] = useState('480p');
-	const [link, setLink] = useState();
-	const [image, setImage] = useState();
-
-	useEffect(() => {
-		async function fetchData() {
-			const fetchedData = await fetch('/api/');
-			const json = await fetchedData.json();
-			setData(json.hello);
-		}
-		fetchData();
-	}, []);
-
-	useEffect(() => {
-		setLink(`http://d864jpdslrchw.cloudfront.net/5f1210ddd747e90a04f705ce/${quality}.mp4`);
-	}, [quality]);
-
-	const handleChange = event => {
-		setImage(event.target.files[0]);
-	};
-
-	async function handleClick(e) {
+	async function handleLike(e) {
 		e.preventDefault();
 
-		console.log(image);
 		const jsonHeader = {
 			headers: {
 				'Content-Type': 'application/json',
 			},
 		};
-
 		const body = {
-			title: 'Final Final Sample Video',
-			description: 'My Description4',
-			tags: ['Funny', 'Comedy', 'Vlog'],
-			likes: 502,
-			dislikes: 155,
-			length: 750,
-			uploadDate: new Date(),
-			views: 3589,
+			video: '5f12065528baaf2690351490',
+			user: '5f13c05b3a78ea05b95d9f27',
+			action: 'dislike',
 		};
 
-		const dbEntry = await axios.post('/api/create-video', body, jsonHeader);
+		const dbEntry = await axios.post('/api/handle-likes', body, jsonHeader);
+		console.log(dbEntry.data);
+	}
 
-		const dbResult = dbEntry.data;
+	async function handleSubscribe(e) {
+		e.preventDefault();
 
-		const info = {
-			fileName: dbResult._id,
-			fileType: image.name.split('.')[1],
-		};
-		const putHeader = {
+		const jsonHeader = {
 			headers: {
-				'Content-Type': info.fileType,
+				'Content-Type': 'application/json',
 			},
 		};
+		const body = {
+			creator: '5f13c07c3a78ea05b95d9f28',
+			loggedUser: '5f13c05b3a78ea05b95d9f27',
+			action: 'unsubscribe',
+		};
 
-		const signedRequest = await axios.post('/api/signed-request', info, jsonHeader);
-
-		const result = signedRequest.data;
-		console.log(result);
-
-		const putObject = await axios.put(result.signedRequest, image, putHeader);
-
-		const s3Result = putObject.data;
-		console.log(s3Result);
-
-		const transcode = await axios.post('/api/transcode', info, jsonHeader);
-
-		const transcodedResult = transcode.data;
-		console.log(transcodedResult);
+		const dbEntry = await axios.post('/api/handle-subscriptions', body, jsonHeader);
+		console.log(dbEntry.data);
 	}
+
 	return (
-		<div>
-			{<p>{data || 'Loading . . .'}</p>}
-			<h2>hola</h2>
-			<video style={{ height: '40%', width: '40%' }} controls src={link} />
-			<p>quality: </p>
-			<button
-				onClick={() => {
-					quality === '480p' ? setQuality('720p') : setQuality('480p');
-				}}>
-				Change quality
+		<div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+			<button style={{ border: '1px solid black' }} onClick={handleSubscribe}>
+				Click to subscribe/unsubscribe
 			</button>
-			<p>link: {link}</p>
-			<img
-				style={{ height: '40%', width: '40%' }}
-				alt='test-image'
-				src='http://d864jpdslrchw.cloudfront.net/5f1210ddd747e90a04f705ce/thumbnail-00001.png'
-			/>
-			<h4>Upload your video: </h4>
-			<input style={{ display: 'block' }} onChange={handleChange} type='file' accept='video/mp4' />
-			<button style={{ display: 'block' }} onClick={handleClick}>
-				Submit
+			<button style={{ border: '1px solid black' }} onClick={handleLike}>
+				Click to like/dislike/whatev
 			</button>
 		</div>
 	);
