@@ -7,10 +7,10 @@ const UserSchema = new Schema({
 	name: String,
 	username: String,
 	videos: String,
-	uploadedVideos: { type: [mongoose.Schema.Types.ObjectID], ref: 'video' },
-	subscriptions: { type: [mongoose.Schema.Types.ObjectID], ref: 'user' },
-	likes: { type: [mongoose.Schema.Types.ObjectID], ref: 'video' },
-	dislikes: { type: [mongoose.Schema.Types.ObjectID], ref: 'video' },
+	uploadedVideos: { type: [mongoose.Schema.Types.ObjectId], ref: 'video' },
+	subscriptions: { type: [mongoose.Schema.Types.ObjectId], ref: 'user' },
+	likes: { type: [mongoose.Schema.Types.ObjectId], ref: 'video' },
+	dislikes: { type: [mongoose.Schema.Types.ObjectId], ref: 'video' },
 	subscribers: Number,
 });
 
