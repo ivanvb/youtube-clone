@@ -51,3 +51,31 @@ exports.getFile = (fileName, res) => {
 		}
 	);
 };
+
+exports.deleteVideoFolder = async (id, res) => {
+	const base = `${id}/`;
+	const params = {
+		Bucket: s3Bucket,
+		Delete: {
+			Objects: [
+				{
+					Key: `${base}480p.mp4`,
+				},
+				{
+					Key: `${base}720p.mp4`,
+				},
+				{
+					Key: `${base}base.mp4`,
+				},
+				{
+					Key: `${base}thumbnail-00001.png`,
+				},
+			],
+			Quiet: false,
+		},
+	};
+
+	await s3.deleteObjects(params, function (err, data) {
+		err ? res.send(err) : res.send(data);
+	});
+};
