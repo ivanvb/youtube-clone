@@ -11,7 +11,7 @@ function Test() {
 	async function handleDeleteVideo(e) {
 		e.preventDefault();
 
-		const dbEntry = await axios.get('/api/get-user-videos?id=5f13c07c3a78ea05b95d9f28&n=2&page=1');
+		const dbEntry = await axios.get('/api/search-videos?key=Comedy&n=5&page=2');
 		console.log(dbEntry.data);
 	}
 

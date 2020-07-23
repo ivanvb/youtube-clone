@@ -7,7 +7,7 @@ const handleGet = async (req, res) => {
 	const number = req.query.n;
 	const offset = req.query.page;
 	let higherBound = number * offset;
-	const lowerBound = higherBound - number;
+	let lowerBound = higherBound - number;
 
 	const user = await User.findById(id);
 	const videos = user.uploadedVideos.reverse();
