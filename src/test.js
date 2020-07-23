@@ -11,14 +11,14 @@ function Test() {
 	async function handleDeleteVideo(e) {
 		e.preventDefault();
 
-		const dbEntry = await axios.delete('/api/delete-video?id=5f120b3c6826980cb020e608');
+		const dbEntry = await axios.get('/api/search-videos?key=Comedy&n=6&page=1');
 		console.log(dbEntry.data);
 	}
 
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
 			<button style={{ border: '1px solid black' }} onClick={handleDeleteVideo}>
-				Click to delete video
+				Click to search video
 			</button>
 		</div>
 	);
