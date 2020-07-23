@@ -16,7 +16,7 @@ const handleGet = async (req, res) => {
 		higherBound = videos.length;
 	}
 	for (let i = lowerBound; i < higherBound; i++) {
-		result.push(videos[i]);
+		result.push(await Video.findById(videos[i]));
 	}
 	res.send(result);
 };
