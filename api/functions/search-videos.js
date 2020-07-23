@@ -1,6 +1,7 @@
 const { routerConfig } = require('../util/router');
 const Video = require('../util/mongoose/models/Video');
 const User = require('../util/mongoose/models/User');
+const { off } = require('../util/mongoose/models/User');
 
 const handleGet = async (req, res) => {
 	let result = {
@@ -27,11 +28,17 @@ const handleGet = async (req, res) => {
 	}
 
 	//Get Videos from different sources
-	let matchingVideos = await Video.find({ title: key }).limit(15).sort({ uploadDate: -1 });
+	let matchingVideos = await Video.find({ title: key })
+		.limit(15 * offset)
+		.sort({ uploadDate: -1 });
 
-	let containingVideos = await Video.find({ title: regex }).limit(15).sort({ uploadDate: -1 });
+	let containingVideos = await Video.find({ title: regex })
+		.limit(15 * offset)
+		.sort({ uploadDate: -1 });
 
-	let tagVideos = await Video.find({ tags: key }).limit(15).sort({ uploadDate: -1 });
+	let tagVideos = await Video.find({ tags: key })
+		.limit(15 * offset)
+		.sort({ uploadDate: -1 });
 
 	result.Videos = matchingVideos.concat(containingVideos, tagVideos);
 
