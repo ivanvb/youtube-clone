@@ -21,6 +21,12 @@ export const userFailure = (error) => {
     };
 };
 
+export const userLogout = () => {
+    return {
+        type: UserTypes.LOGOUT_USER,
+    };
+};
+
 export const fetchUser = (token) => {
     return async (dispatch) => {
         dispatch(userLoading());
@@ -69,5 +75,16 @@ export const loginUser = (userData) => {
             const data = await res.json();
             dispatch(userSuccess(data));
         }
+    };
+};
+
+export const logOut = () => {
+    return async (dispatch) => {
+        dispatch(userLoading());
+        await fetch('/api/logout', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+        });
+        dispatch(userLogout());
     };
 };

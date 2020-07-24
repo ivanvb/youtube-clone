@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import LikeIcon from '../../icons/LikeIcon';
 import RecentIcon from '../../icons/RecentIcon';
 import SubscriptionsIcon from '../../icons/SubscriptionsIcon';
+import { useDispatch } from 'react-redux';
+import { logOut } from '../../redux/user/user.actions';
 
 const Sidenav = ({ isOpen, className }) => {
     const routes = [
@@ -22,6 +24,12 @@ const Sidenav = ({ isOpen, className }) => {
             icon: <LikeIcon className="h-4 w-4" />,
         },
     ];
+
+    const dispatch = useDispatch();
+
+    function handleLogout() {
+        dispatch(logOut());
+    }
     return (
         <nav
             className={`transform mt-8 pt-2 ${className} ${
@@ -37,6 +45,16 @@ const Sidenav = ({ isOpen, className }) => {
                         </Link>
                     </li>
                 ))}
+            </ul>
+            <hr></hr>
+            <ul className="text-sm">
+                <li
+                    className="hover:bg-gray-200 pl-4 py-2 flex items-center cursor-pointer"
+                    onClick={handleLogout}
+                >
+                    <RecentIcon className="h-4 w-4" />
+                    <span className="ml-2">Log Out</span>
+                </li>
             </ul>
         </nav>
     );

@@ -28,6 +28,13 @@ const reducer = (state = initialState, action) => {
                 data: action.payload,
                 loading: false,
             };
+        case UserTypes.LOGOUT_USER:
+            window.localStorage.removeItem('token');
+            return {
+                ...state,
+                loading: false,
+                data: '',
+            };
     }
 
     return state;
