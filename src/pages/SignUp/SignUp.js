@@ -4,16 +4,67 @@ import InputField from '../../components/InputField/index';
 import Button from '../../components/Button/index';
 import LobbyContainer from '../../components/LobbyContainer/index';
 import { Link } from 'react-router-dom';
+import useForm from '../../hooks/useForm';
+import useFetch from '../../hooks/useFetch';
 
 const SignUpForm = () => {
+    const [form, setForm] = useForm({ name: '', username: '', password: '', email: '' });
+    const [data, loading, error, util] = useFetch('/api/sign-up/');
+    function handleSubmit(e) {
+        e.preventDefault();
+        util.start({
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(form),
+        });
+    }
+
+    console.log(data, loading, error);
     return (
         <>
             <Heading1 className="text-gray-800 mb-20">Youtube Clone</Heading1>
             <p className="mb-4">Create a new account</p>
-            <InputField type="text" placeholder="Username" className="mb-4" />
-            <InputField type="text" placeholder="Email" className="mb-4" />
-            <InputField type="password" placeholder="Password" className="mb-4" />
-            <Button>Sign Up</Button>
+            <form onSubmit={handleSubmit} autoComplete="off">
+                <InputField
+                    name="name"
+                    onChange={setForm}
+                    value={form.name}
+                    required={true}
+                    type="text"
+                    placeholder="Name"
+                    className="mb-4"
+                />
+                <InputField
+                    name="username"
+                    onChange={setForm}
+                    value={form.username}
+                    required={true}
+                    type="text"
+                    placeholder="Username"
+                    className="mb-4"
+                />
+                <InputField
+                    name="email"
+                    onChange={setForm}
+                    value={form.email}
+                    required={true}
+                    type="email"
+                    placeholder="Email"
+                    className="mb-4"
+                />
+                <InputField
+                    name="password"
+                    onChange={(e) => {
+                        setForm(e);
+                    }}
+                    value={form.password}
+                    required={true}
+                    type="password"
+                    placeholder="Password"
+                    className="mb-4"
+                />
+                <Button>Sign Up</Button>
+            </form>
             <p className="absolute bottom-0 mb-6">
                 Already have an account?{' '}
                 <Link to="/login" className="font-bold">

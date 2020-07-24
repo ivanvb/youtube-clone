@@ -4,9 +4,9 @@ require('../connection');
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-    email: String,
+    email: { type: String, unique: true },
     name: String,
-    username: String,
+    username: { type: String, unique: true },
     videos: String,
     uploadedVideos: { type: [mongoose.Schema.Types.ObjectId], ref: 'video' },
     subscriptions: { type: [mongoose.Schema.Types.ObjectId], ref: 'user' },
