@@ -1,6 +1,7 @@
 const { routerConfig } = require('../util/router');
 const auth = require('../util/firebase/auth');
 const User = require('../util/mongoose/models/User');
+var gravatar = require('gravatar');
 
 const handlePost = async (req, res) => {
 	const params = {
@@ -13,11 +14,13 @@ const handlePost = async (req, res) => {
 		likes: [],
 		dislikes: [],
 		subscribers: 0,
+		imageUrl: gravatar.url(req.body.email),
 	};
 	try {
 		await auth.signUp(req.body.email, req.body.password);
 		let databaseUser = await User.create(params);
 		let token = await auth.getUserToken();
+		console.log(databaseUser._doc);
 		res.send({ User: databaseUser._doc, token: token });
 	} catch (err) {
 		res.status(400);
