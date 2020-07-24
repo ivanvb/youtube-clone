@@ -9,6 +9,7 @@ import Video from './pages/Video/Video';
 import Search from './pages/Search/Search';
 import Upload from './pages/Upload/Upload';
 import { fetchUser } from './redux/user/user.actions';
+import Loading from './components/Loading/index';
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -52,6 +53,7 @@ function App() {
         }
     }, []);
 
+    if (user.loading) return <Loading />;
     return isLogged ? <AppRouter /> : <LobbyRouter />;
 }
 

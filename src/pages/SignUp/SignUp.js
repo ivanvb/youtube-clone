@@ -7,11 +7,11 @@ import { Link } from 'react-router-dom';
 import useForm from '../../hooks/useForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { signUpUser } from '../../redux/user/user.actions';
+import Loading from '../../components/Loading/index';
 
 const SignUpForm = () => {
     const [form, setForm] = useForm({ name: '', username: '', password: '', email: '' });
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.user);
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -74,7 +74,8 @@ const SignUpForm = () => {
 };
 
 const Login = () => {
-    return <LobbyContainer Form={SignUpForm} />;
+    const user = useSelector((state) => state.user);
+    return user.loading ? <Loading /> : <LobbyContainer Form={SignUpForm} />;
 };
 
 export default Login;
