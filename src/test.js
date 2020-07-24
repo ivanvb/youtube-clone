@@ -29,9 +29,10 @@ function Test() {
 	async function signUp(e) {
 		e.preventDefault();
 		const body = {
-			token: token,
+			email: 'testEmail35@outlook.com',
+			password: '123444455',
 		};
-		const dbEntry = await axios.post('/api/get-user-from-token', body, jsonHeader);
+		const dbEntry = await axios.post('/api/sign-up', body, jsonHeader);
 		console.log(dbEntry.data);
 	}
 	return (
