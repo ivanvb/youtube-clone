@@ -32,7 +32,7 @@ function Test() {
 			email: 'testEmail35@outlook.com',
 			password: '123444455',
 		};
-		const dbEntry = await axios.post('/api/sign-up', body, jsonHeader);
+		const dbEntry = await axios.get('/api/search-videos?key=Ho&n=10&page=5');
 		console.log(dbEntry.data);
 	}
 	return (
