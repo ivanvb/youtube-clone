@@ -5,21 +5,19 @@ import Button from '../../components/Button/index';
 import LobbyContainer from '../../components/LobbyContainer/index';
 import { Link } from 'react-router-dom';
 import useForm from '../../hooks/useForm';
-import useFetch from '../../hooks/useFetch';
+import { useDispatch, useSelector } from 'react-redux';
+import { signUpUser } from '../../redux/user/user.actions';
 
 const SignUpForm = () => {
     const [form, setForm] = useForm({ name: '', username: '', password: '', email: '' });
-    const [data, loading, error, util] = useFetch('/api/sign-up/');
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.user);
+
     function handleSubmit(e) {
         e.preventDefault();
-        util.start({
-            method: 'POST',
-            headers: { 'content-type': 'application/json' },
-            body: JSON.stringify(form),
-        });
+        dispatch(signUpUser(form));
     }
 
-    console.log(data, loading, error);
     return (
         <>
             <Heading1 className="text-gray-800 mb-20">Youtube Clone</Heading1>

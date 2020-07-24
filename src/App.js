@@ -9,6 +9,8 @@ import Video from './pages/Video/Video';
 import Search from './pages/Search/Search';
 import Upload from './pages/Upload/Upload';
 
+import { useSelector } from 'react-redux';
+
 const LobbyRouter = () => {
     return (
         <Router>
@@ -38,7 +40,8 @@ const AppRouter = () => {
     );
 };
 function App() {
-    const isLogged = false;
+    const user = useSelector((state) => state.user);
+    const isLogged = Object.keys(user.data).length > 0;
 
     return isLogged ? <AppRouter /> : <LobbyRouter />;
 }
