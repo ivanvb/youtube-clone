@@ -1,5 +1,6 @@
 import React from 'react';
 import UserProfile from '../../components/UserProfile/index';
+import { useSelector } from 'react-redux';
 
 const video = {
     img: 'https://avatars1.githubusercontent.com/u/33399537?s=400&v=4',
@@ -15,6 +16,7 @@ const video = {
 };
 
 const Profile = () => {
+    const user = useSelector((state) => state.user);
     const data = {
         channelName: 'Channel 02',
         subscribers: 12,
@@ -26,7 +28,13 @@ const Profile = () => {
 
     return (
         <div>
-            <UserProfile {...data} />
+            <UserProfile
+                {...user.data}
+                videos={data.videos}
+                channelName={user.data.username}
+                img={user.data.imageUrl}
+                bgColor="#222"
+            />
         </div>
     );
 };

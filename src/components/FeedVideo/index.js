@@ -7,10 +7,11 @@ const FeedVideo = ({
     channelName,
     title,
     views,
-    time,
+    length,
     description,
-    duration,
+    time,
     hideChannel,
+    _id,
 }) => {
     return (
         <div className={`${className} relative w-full`}>
@@ -24,9 +25,16 @@ const FeedVideo = ({
             )}
             <Link to="/video" className={`flex ${hideChannel ? '' : 'mt-2'}`}>
                 <div className="relative h-24 w-48 md:h-32 md:w-64">
-                    <img src={img} alt={title} className="h-24 w-48 md:h-32 md:w-64 object-cover" />
+                    <img
+                        src={`https://d864jpdslrchw.cloudfront.net/${_id}/thumbnail-00001.png`}
+                        alt={title}
+                        className="h-24 w-48 md:h-32 md:w-64 object-cover"
+                    />
                     <span className="absolute bottom-0 py-1 px-1 my-2 mx-2 bg-black text-white text-xs rounded-sm right-0 opacity-75">
-                        {duration}
+                        {Math.floor(length / 60)
+                            .toString()
+                            .padStart(2, '0')}
+                        :{(length % 60).toString().padStart(2, '0')}
                     </span>
                 </div>
                 <div className="ml-3 w-8/12">
