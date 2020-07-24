@@ -21,7 +21,20 @@ export const userFailure = (error) => {
     };
 };
 
-export const fetchUser = (token) => {};
+export const fetchUser = (token) => {
+    return async (dispatch) => {
+        dispatch(userLoading());
+        const res = await fetch('/api/get-user-from-token', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ token }),
+        });
+        if (res.status !== 400) {
+            const data = await res.json();
+            dispatch(userSuccess(data));
+        }
+    };
+};
 
 export const signUpUser = (userData) => {
     return async (dispatch) => {

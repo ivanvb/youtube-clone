@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import SignUp from './pages/SignUp/SignUp';
@@ -8,8 +8,9 @@ import Layout from './components/Layout/index';
 import Video from './pages/Video/Video';
 import Search from './pages/Search/Search';
 import Upload from './pages/Upload/Upload';
+import { fetchUser } from './redux/user/user.actions';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 const LobbyRouter = () => {
     return (
@@ -41,7 +42,15 @@ const AppRouter = () => {
 };
 function App() {
     const user = useSelector((state) => state.user);
+    const dispatch = useDispatch();
     const isLogged = Object.keys(user.data).length > 0;
+
+    useEffect(() => {
+        let token = window.localStorage.getItem('token');
+        if (token !== 'undefined' && !!token) {
+            dispatch(fetchUser(token));
+        }
+    }, []);
 
     return isLogged ? <AppRouter /> : <LobbyRouter />;
 }

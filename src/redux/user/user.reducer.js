@@ -21,6 +21,7 @@ const reducer = (state = initialState, action) => {
                 loading: false,
             };
         case UserTypes.USER_SUCCESS:
+            action.payload.token && window.localStorage.setItem('token', action.payload.token);
             return {
                 ...state,
                 error: '',
