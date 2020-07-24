@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 const jsonHeader = {
@@ -8,17 +8,42 @@ const jsonHeader = {
 };
 
 function Test() {
+	const [token, setToken] = useState('');
 	async function handleDeleteVideo(e) {
 		e.preventDefault();
+		const body = {
+			email: 'email2@gmail.com',
+			password: '123456',
+		};
+		const dbEntry = await axios.post('/api/login', body, jsonHeader);
+		console.log(dbEntry.data);
+		setToken(dbEntry.data.Token);
+	}
 
-		const dbEntry = await axios.get('/api/search-videos?key=Comedy&n=5&page=2');
+	async function logout(e) {
+		e.preventDefault();
+		const dbEntry = await axios.post('/api/logout');
 		console.log(dbEntry.data);
 	}
 
+	async function signUp(e) {
+		e.preventDefault();
+		const body = {
+			token: token,
+		};
+		const dbEntry = await axios.post('/api/get-user-from-token', body, jsonHeader);
+		console.log(dbEntry.data);
+	}
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
 			<button style={{ border: '1px solid black' }} onClick={handleDeleteVideo}>
-				Click to search video
+				Click to login
+			</button>
+			<button style={{ border: '1px solid black' }} onClick={logout}>
+				Click to logout
+			</button>
+			<button style={{ border: '1px solid black' }} onClick={signUp}>
+				Click to sign up
 			</button>
 		</div>
 	);
