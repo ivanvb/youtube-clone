@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
 require('../connection');
+require('./Video');
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
