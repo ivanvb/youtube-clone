@@ -13,6 +13,7 @@ const FeedVideo = ({
     time,
     hideChannel,
     _id,
+    uploadDate,
 }) => {
     return (
         <div className={`${className} relative w-full`}>
@@ -39,7 +40,7 @@ const FeedVideo = ({
                     <h3>{title}</h3>
                     <p className="text-xs text-gray-700">
                         <span>{views} views</span> • <span>{channelName}</span> •{' '}
-                        <span>{formatDate(time)}</span>
+                        <span>{formatDate(uploadDate)}</span>
                     </p>
                     <p className="text-gray-700 text-xs clamp-2 mt-2">{description}</p>
                 </div>

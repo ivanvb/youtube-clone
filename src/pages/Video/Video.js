@@ -47,12 +47,13 @@ const Video = (props) => {
                         <p className="text-xs">{video.uploadingUser.subscribers} subscribers</p>
                         <p className="text-xs text-red-600 uppercase">Subscribe</p>
                     </div>
-                    <div className="flex ml-auto text-sm">
+                    <div className="flex flex-wrap ml-auto text-sm">
+                        <span className="ml-2 w-full">{video.views} Views</span>
                         <span className="mx-2 flex align-baseline">
                             <LikeIcon className="h-4 w-4 mt-1 mr-2" />
                             {video.likes}
                         </span>
-                        <span className="mx-2 flex ml-auto text-sm">
+                        <span className="mx-2 flex ml-4 lg:ml-auto text-sm">
                             <LikeIcon className="h-4 w-4 mt-1 mr-2 transform rotate-180" />
                             {video.dislikes}
                         </span>
