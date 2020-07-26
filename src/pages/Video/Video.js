@@ -8,12 +8,23 @@ const Video = (props) => {
     const videoId = props.match.params.id;
     const [openDescription, setOpenDescription] = useState(false);
     const [quality, setQuality] = useState(360);
-    const [data, loading, error, utils] = useFetch(`/api/get-video?id=${videoId}`);
+    const [video, videoIsLoading, videoError, videoUtils] = useFetch(
+        `/api/get-video?id=${videoId}`
+    );
+    const [, , error, watchUtils] = useFetch(`/api/watch-video`);
+
     useEffect(() => {
-        utils.start();
+        videoUtils.start();
+        watchUtils.start({
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: videoId }),
+        });
     }, []);
 
-    if (loading || data === null) {
+    if (videoIsLoading || video === null) {
         return <Loading />;
     } else {
         return (
@@ -23,31 +34,34 @@ const Video = (props) => {
                     controls
                     className="w-full h-48 md:h-96 mt-4 my-2 object-contain bg-black"
                 />
-                <h1 className="font-bold mb-2 text-xl">{data.title}</h1>
+                <h1 className="font-bold mb-2 text-xl">{video.title}</h1>
                 <div className="flex items-center mt-4">
-                    <Link to={`/profile/${data.uploadingUser.username}`}>
-                        <img src={data.uploadingUser.imageUrl} className="h-16 w-16 rounded-full" />
+                    <Link to={`/profile/${video.uploadingUser.username}`}>
+                        <img
+                            src={video.uploadingUser.imageUrl}
+                            className="h-16 w-16 rounded-full"
+                        />
                     </Link>
                     <div className="ml-4">
-                        <h2 className="font-bold">{data.uploadingUser.username}</h2>
-                        <p className="text-xs">{data.uploadingUser.subscribers} subscribers</p>
+                        <h2 className="font-bold">{video.uploadingUser.username}</h2>
+                        <p className="text-xs">{video.uploadingUser.subscribers} subscribers</p>
                         <p className="text-xs text-red-600 uppercase">Subscribe</p>
                     </div>
                     <div className="flex ml-auto text-sm">
                         <span className="mx-2 flex align-baseline">
                             <LikeIcon className="h-4 w-4 mt-1 mr-2" />
-                            {data.likes}
+                            {video.likes}
                         </span>
                         <span className="mx-2 flex ml-auto text-sm">
                             <LikeIcon className="h-4 w-4 mt-1 mr-2 transform rotate-180" />
-                            {data.dislikes}
+                            {video.dislikes}
                         </span>
                     </div>
                 </div>
                 <h3 className="font-bold mt-4">Description</h3>
                 <div className="mt-2">
                     <p className={`${openDescription ? '' : 'clamp-2'} text-sm`}>
-                        {data.description}
+                        {video.description}
                     </p>
                     <p
                         className="text-center font-bold mt-4 cursor-pointer"
