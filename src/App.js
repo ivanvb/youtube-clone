@@ -33,7 +33,7 @@ const AppRouter = () => {
                 <Switch>
                     <Route path="/" exact component={Home} />
                     <Route path="/profile" exact component={Profile} />
-                    <Route path="/video" exact component={Video} />
+                    <Route path="/video/:id" exact component={Video} />
                     <Route path="/search" exact component={Search} />
                     <Route path="/upload" exact component={Upload} />
                     <Route path="/profile/:username" exact component={ChannelPage} />

@@ -24,7 +24,7 @@ const FeedVideo = ({
                     <span className="ml-3 font-bold">{channelName}</span>
                 </Link>
             )}
-            <Link to="/video" className={`flex ${hideChannel ? '' : 'mt-2'}`}>
+            <Link to={`/video/${_id}`} className={`flex ${hideChannel ? '' : 'mt-2'}`}>
                 <div className="relative h-24 w-48 md:h-32 md:w-64">
                     <img
                         src={`https://d864jpdslrchw.cloudfront.net/${_id}/thumbnail-00001.png`}
