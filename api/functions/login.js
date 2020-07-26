@@ -14,7 +14,7 @@ const handlePost = async (req, res) => {
         if (token !== null) {
             results.token = token;
         }
-        results.User = await User.findOne({ email: email }).populate('uploadedVideos');
+        results.user = await User.findOne({ email: email }).populate('uploadedVideos');
         res.send(results);
     } catch (err) {
         res.status(400);

@@ -26,7 +26,19 @@ const Home = () => {
         return <Loading />;
     }
 
-    return <div className="px-2 md:px-8 pb-8">{data && <VideoList videos={data.videos} />}</div>;
+    let videos;
+    if (data) {
+        videos = data.videos.map((video) => {
+            return {
+                ...video,
+                className: 'mx-2 md:mx-0 mt-4',
+                channelName: video.uploadingUser.username,
+                img: video.uploadingUser.imageUrl,
+            };
+        });
+    }
+
+    return <div className="px-2 md:px-8 pb-8">{data && <VideoList videos={videos} />}</div>;
 };
 
 export default Home;

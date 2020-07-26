@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 
 const Navbar = () => {
     const user = useSelector((state) => state.user);
+    console.log(user.data.imageUrl);
     return (
         <nav className="fixed flex justify-between items-center w-full bg-white pr-2 pl-8 md:pr-10 md:pl-10 py-2 shadow z-20">
             <Link to="/">

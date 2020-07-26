@@ -55,7 +55,7 @@ export const signUpUser = (userData) => {
             dispatch(userFailure(error));
         } else {
             const data = await res.json();
-            dispatch(userSuccess(data));
+            dispatch(userSuccess({ token: data.token, ...data.user }));
         }
     };
 };
@@ -73,7 +73,7 @@ export const loginUser = (userData) => {
             dispatch(userFailure(error));
         } else {
             const data = await res.json();
-            dispatch(userSuccess(data));
+            dispatch(userSuccess({ token: data.token, ...data.user }));
         }
     };
 };

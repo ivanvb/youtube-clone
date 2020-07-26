@@ -5,13 +5,12 @@ import App from './App';
 import './css/tailwind/tailwind.build.css';
 import { Provider } from 'react-redux';
 import store from './redux/store';
-import Test from './test';
 
 ReactDOM.render(
-	<React.StrictMode>
-		<Provider store={store}>
-			<Test />
-		</Provider>
-	</React.StrictMode>,
-	document.getElementById('root')
+    <React.StrictMode>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
