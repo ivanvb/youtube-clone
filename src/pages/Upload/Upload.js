@@ -39,7 +39,39 @@ const Upload = () => {
                 'Content-Type': 'application/json',
             },
         });
-        console.log(res);
+
+        console.log(res.data._id);
+
+        const info = {
+            fileName: res.data._id,
+            fileType: 'mp4',
+        };
+        const putHeader = {
+            headers: {
+                'Content-Type': info.fileType,
+            },
+        };
+
+        const signedRequest = await axios.post('/api/signed-request', info, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        const result = signedRequest.data;
+
+        const putObject = await axios.put(result.signedRequest, form.video, putHeader);
+
+        const s3Result = putObject.data;
+
+        const transcode = await axios.post('/api/transcode', info, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        const transcodedResult = transcode.data;
+        console.log(transcodedResult);
     }
 
     return (
