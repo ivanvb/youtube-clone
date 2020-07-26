@@ -17,20 +17,18 @@ const video = {
 
 const Profile = () => {
     const user = useSelector((state) => state.user);
-    const data = {
-        channelName: 'Channel 02',
-        subscribers: 12,
-        subscribed: true,
-        img: 'https://avatars1.githubusercontent.com/u/33399537?s=400&v=4',
-        videos: new Array(5).fill(0).map((_) => video),
-        bgColor: '#222',
-    };
 
+    console.log(user.data.uploadedVideos);
     return (
         <div>
             <UserProfile
                 {...user.data}
-                videos={data.videos}
+                videos={user.data.uploadedVideos
+                    .map((video) => ({
+                        ...video,
+                        hideChannel: true,
+                    }))
+                    .reverse()}
                 channelName={user.data.username}
                 img={user.data.imageUrl}
                 bgColor="#222"

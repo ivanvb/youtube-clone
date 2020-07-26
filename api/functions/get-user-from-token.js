@@ -6,7 +6,11 @@ const jwt = require('jsonwebtoken');
 const handlePost = async (req, res) => {
     const token = req.body.token;
     const decoded = jwt.decode(token);
-    res.send((await User.findOne({ email: decoded.email })).populate('uploadedVideos'));
+    let found = await User.findOne({ email: decoded.email }).populate({
+        path: 'uploadedVideos',
+        model: 'video',
+    });
+    res.send({ ...found._doc });
 };
 
 module.exports = routerConfig({

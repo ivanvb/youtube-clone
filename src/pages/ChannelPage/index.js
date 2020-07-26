@@ -21,10 +21,12 @@ const Profile = (props) => {
             {data && (
                 <UserProfile
                     channelName={data.username}
-                    subscribers={5}
+                    subscribers={data.subscribers}
                     subscribed={false}
                     img={data.imageUrl}
-                    videos={data.uploadedVideos}
+                    videos={data.uploadedVideos
+                        .map((video) => ({ ...video, hideChannel: true }))
+                        .reverse()}
                     bgColor="#222"
                 />
             )}
