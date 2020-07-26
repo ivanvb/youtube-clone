@@ -10,7 +10,7 @@ const useForm = (initialState) => {
             setForm((prev) => {
                 return {
                     ...prev,
-                    [target.name]: target.value,
+                    [target.name]: target.files ? target.files[0] : target.value,
                 };
             });
         },
