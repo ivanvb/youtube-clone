@@ -7,7 +7,6 @@ export const formatDuration = (duration) => {
 };
 
 export const formatDate = (date) => {
-    console.log(date, new Date(date));
     const delta = Math.round((new Date() - new Date(date)) / 1000);
 
     let minute = 60,
