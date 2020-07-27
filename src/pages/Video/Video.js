@@ -3,11 +3,23 @@ import { Link } from 'react-router-dom';
 import LikeIcon from '../../icons/LikeIcon';
 import useFetch from '../../hooks/useFetch';
 import Loading from '../../components/Loading/index';
+import { getNetworkSpeed } from '../../util/index';
+
+const networkSpeedMap = {
+    '2g': 360,
+    '3g': 480,
+    '4g': 720,
+};
+
+const networkSpeed = getNetworkSpeed();
 
 const Video = (props) => {
     const videoId = props.match.params.id;
     const [openDescription, setOpenDescription] = useState(false);
-    const [quality, setQuality] = useState(480);
+    const [quality, setQuality] = useState(networkSpeed ? networkSpeedMap[networkSpeed] : 360);
+    const [playingTime, setPlayingTime] = useState(0);
+    const videoElement = useRef();
+
     const [video, videoIsLoading, videoError, videoUtils] = useFetch(
         `/api/get-video?id=${videoId}`
     );
@@ -24,6 +36,13 @@ const Video = (props) => {
         });
     }, []);
 
+    useEffect(() => {
+        if (videoElement.current) {
+            videoElement.current.currentTime = playingTime || 0;
+            videoElement.current.play();
+        }
+    }, [playingTime]);
+
     if (videoIsLoading || video === null) {
         return <Loading />;
     } else {
@@ -33,8 +52,29 @@ const Video = (props) => {
                     src={`https://d864jpdslrchw.cloudfront.net/${videoId}/${quality}p.mp4`}
                     controls
                     className="w-full h-48 md:h-96 mt-4 my-2 object-contain bg-black"
+                    ref={videoElement}
                 />
-                <h1 className="font-bold mb-2 text-xl">{video.title}</h1>
+                <div className="flex items-center">
+                    <h1 className="font-bold mb-2 text-xl flex-grow">{video.title}</h1>
+                    {[720, 480, 360].map((videoQuality, i) => {
+                        return (
+                            <React.Fragment key={i}>
+                                <label htmlFor={`${videoQuality}p`}>{videoQuality}p</label>
+                                <input
+                                    checked={quality === videoQuality}
+                                    className="mx-2"
+                                    id={`${videoQuality}p`}
+                                    type="radio"
+                                    name="quality"
+                                    onChange={(e) => {
+                                        setQuality(videoQuality);
+                                        setPlayingTime(videoElement.current.currentTime);
+                                    }}
+                                />
+                            </React.Fragment>
+                        );
+                    })}
+                </div>
                 <div className="flex items-center mt-4">
                     <Link to={`/profile/${video.uploadingUser.username}`}>
                         <img

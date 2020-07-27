@@ -59,3 +59,9 @@ export const shuffleArray = (arr) => {
 export const isFormInvalid = (form) => {
     return !!Object.keys(form).find((key) => form[key] === '');
 };
+
+export const getNetworkSpeed = () => {
+    const connection =
+        navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    return connection ? connection.effectiveType : null;
+};
