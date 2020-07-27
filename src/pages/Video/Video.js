@@ -7,7 +7,7 @@ import Loading from '../../components/Loading/index';
 const Video = (props) => {
     const videoId = props.match.params.id;
     const [openDescription, setOpenDescription] = useState(false);
-    const [quality, setQuality] = useState(360);
+    const [quality, setQuality] = useState(480);
     const [video, videoIsLoading, videoError, videoUtils] = useFetch(
         `/api/get-video?id=${videoId}`
     );
