@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { formatDuration, formatDate } from '../../util/index';
+import { useSelector } from 'react-redux';
 
 const FeedVideo = ({
     className,
@@ -15,6 +16,7 @@ const FeedVideo = ({
     _id,
     uploadDate,
 }) => {
+    const user = useSelector((state) => state.user);
     return (
         <div className={`${className} relative w-full`}>
             {hideChannel ? (
@@ -45,6 +47,20 @@ const FeedVideo = ({
                     <p className="text-gray-700 text-xs clamp-2 mt-2">{description}</p>
                 </div>
             </Link>
+            {user.data.username === channelName && (
+                <div className="flex absolute right-0 top-0">
+                    <button
+                        onClick={() => {
+                            fetch(`/api/delete-video?id=${_id}`, { method: 'DELETE' }).then(
+                                alert('deleted')
+                            );
+                        }}
+                    >
+                        Delete
+                    </button>
+                    <button>Edit</button>
+                </div>
+            )}
         </div>
     );
 };

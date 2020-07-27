@@ -46,7 +46,6 @@ const AppRouter = () => {
 };
 function App() {
     const user = useSelector((state) => state.user);
-    console.log(user);
     const dispatch = useDispatch();
     const isLogged = Object.keys(user.data).length > 0;
 

@@ -73,6 +73,7 @@ export const loginUser = (userData) => {
             dispatch(userFailure(error));
         } else {
             const data = await res.json();
+            console.log(data);
             dispatch(userSuccess({ token: data.token, ...data.user }));
         }
     };

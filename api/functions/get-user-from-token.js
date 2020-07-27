@@ -10,6 +10,7 @@ const handlePost = async (req, res) => {
         path: 'uploadedVideos',
         model: 'video',
     });
+    console.log(found);
     res.send({ ...found._doc });
 };
 
