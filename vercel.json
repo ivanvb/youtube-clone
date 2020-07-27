@@ -1,11 +1,11 @@
 {
-    "routes": [
-        { "src": "/api/", "dest": "/api/functions/index.js" },
-        { "src": "/api/(?<id>.*)", "dest": "/api/functions/$id.js" }
-    ],
-    "functions": {
-        "api/util/router.js": {
-            "excludeFiles": "."
-        }
-    }
+	"routes": [
+		{ "src": "/api/", "dest": "/api/functions/index.js" },
+		{ "src": "/api/(?<id>.*)", "dest": "/api/functions/$id.js" }
+	],
+	"functions": {
+		"api/router.js": {
+			"excludeFiles": "."
+		}
+	}
 }

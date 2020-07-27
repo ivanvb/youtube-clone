@@ -1,6 +1,6 @@
-const { routerConfig } = require('../util/router');
-const User = require('../util/mongoose/models/User');
-const Video = require('../util/mongoose/models/Video');
+const { routerConfig } = require('../router');
+const User = require('../../util/mongoose/models/User');
+const Video = require('../../util/mongoose/models/Video');
 
 const handleGet = async (req, res) => {
 	const id = req.query.id;

@@ -1,5 +1,5 @@
-const { routerConfig } = require('../util/router');
-const Video = require('../util/mongoose/models/Video');
+const { routerConfig } = require('../router');
+const Video = require('../../util/mongoose/models/Video');
 
 const handlePost = async (req, res) => {
 	const id = req.body.id;
