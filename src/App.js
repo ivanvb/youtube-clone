@@ -49,16 +49,21 @@ function App() {
     const user = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const isLogged = Object.keys(user.data).length > 0;
+    const [hasStartedFetching, setHasStartedFetching] = useState(false);
 
     useEffect(() => {
         let token = window.localStorage.getItem('token');
         if (token !== 'undefined' && !!token) {
             dispatch(fetchUser(token));
+            setHasStartedFetching(true);
         }
     }, []);
 
-    if (user.loading) return <Loading />;
-    return isLogged ? <AppRouter /> : <LobbyRouter />;
+    if (user.loading || !hasStartedFetching) {
+        return <Loading />;
+    } else {
+        return isLogged ? <AppRouter /> : <LobbyRouter />;
+    }
 }
 
 export default App;
