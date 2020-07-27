@@ -58,7 +58,7 @@ const FeedVideo = ({
                     >
                         Delete
                     </button>
-                    <button>Edit</button>
+                    <Link to={`/edit/${_id}`}>Edit</Link>
                 </div>
             )}
         </div>

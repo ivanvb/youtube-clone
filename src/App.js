@@ -11,7 +11,7 @@ import Upload from './pages/Upload/Upload';
 import ChannelPage from './pages/ChannelPage/index';
 import { fetchUser } from './redux/user/user.actions';
 import Loading from './components/Loading/index';
-import ProgressBar from './components/ProgressBar/index';
+import EditVideo from './pages/EditVideo/index';
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -38,6 +38,7 @@ const AppRouter = () => {
                     <Route path="/search" exact component={Search} />
                     <Route path="/upload" exact component={Upload} />
                     <Route path="/profile/:username" exact component={ChannelPage} />
+                    <Route path="/edit/:id" exact component={EditVideo} />
                     <Redirect to={'/'} />
                 </Switch>
             </Layout>

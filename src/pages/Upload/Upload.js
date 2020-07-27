@@ -1,11 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
-import InputField from '../../components/InputField/index';
-import TextField from '../../components/TextField/index';
-import Button from '../../components/Button/index';
-import useForm from '../../hooks/useForm';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { getVideoDuration, isFormInvalid } from '../../util/index';
+import { getVideoDuration } from '../../util/index';
 import ProgressBar from '../../components/ProgressBar/index';
+import VideoForm from '../../components/VideoForm/index';
 
 import axios from 'axios';
 
@@ -17,24 +14,15 @@ const Upload = () => {
         error: null,
         loadingPercentage: null,
     });
-    const formElement = useRef();
 
-    const [form, setForm] = useForm({
-        video: '',
-        title: '',
-        tags: '',
-        description: '',
-    });
-
-    function handleUploadProgress(progressEvent) {
+    function handleUploadProgress(form, progressEvent) {
         setUploadMetadata((prev) => ({
             ...prev,
             loadingPercentage: Math.ceil((progressEvent.loaded / form.video.size) * 100),
         }));
     }
 
-    async function handleUpload(e) {
-        e.preventDefault();
+    async function handleUpload(form) {
         setUploadMetadata((prev) => ({
             ...prev,
             loading: true,
@@ -69,7 +57,9 @@ const Upload = () => {
             headers: {
                 'Content-Type': info.fileType,
             },
-            onUploadProgress: handleUploadProgress,
+            onUploadProgress: (progressEvent) => {
+                handleUploadProgress(form, progressEvent);
+            },
         };
         const signedRequest = await axios.post('/api/signed-request', info, postHeaders);
         const result = signedRequest.data;
@@ -97,59 +87,16 @@ const Upload = () => {
                 </div>
             )}
             <div className="pt-4 px-2 md:px-8 pb-4">
-                <form className="flex flex-wrap" onSubmit={handleUpload} ref={formElement}>
-                    <div className="w-full md:w-5/12 pr-0 md:pr-4">
-                        <div className="relative">
-                            <input
-                                type="file"
-                                id="fileUpload"
-                                name="video"
-                                required={true}
-                                onChange={async (e) => {
-                                    setForm(e);
-                                }}
-                            />
-                            <label
-                                htmlFor="fileUpload"
-                                id="labelFileUpload"
-                                content={`${
-                                    form.video === '' ? 'Select a video' : `${form.video.name}`
-                                }`}
-                            ></label>
-                        </div>
-                    </div>
-                    <div className="w-full md:w-7/12 mt-4 md:mt-0">
-                        <InputField
-                            required={true}
-                            placeholder="Title"
-                            className="w-full"
-                            name="title"
-                            value={form.title}
-                            onChange={setForm}
-                        />
-                        <TextField
-                            required={true}
-                            className="mt-4"
-                            placeholder="Tags"
-                            lines={7}
-                            name="tags"
-                            value={form.tags}
-                            onChange={setForm}
-                        />
-                        <TextField
-                            required={true}
-                            className="mt-4"
-                            placeholder="Description"
-                            lines={7}
-                            name="description"
-                            value={form.description}
-                            onChange={setForm}
-                        />
-                        <Button disabled={isFormInvalid(form)} className="mt-4">
-                            Upload
-                        </Button>
-                    </div>
-                </form>
+                <VideoForm
+                    handleSubmit={handleUpload}
+                    initialState={{
+                        video: '',
+                        title: '',
+                        tags: '',
+                        description: '',
+                    }}
+                    video
+                />
             </div>
         </div>
     );
