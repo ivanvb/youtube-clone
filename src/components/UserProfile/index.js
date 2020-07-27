@@ -2,7 +2,16 @@ import React from 'react';
 import Button from '../Button/index';
 import VideoList from '../VideoList/index';
 
-const UserProfile = ({ channelName, subscribers, subscribed, img, videos, bgColor, className }) => {
+const UserProfile = ({
+    channelName,
+    subscribers,
+    subscribed,
+    img,
+    videos,
+    bgColor,
+    className,
+    isLoggedUser,
+}) => {
     return (
         <div className={className}>
             <div className="h-48 w-full flex px-3 md:px-8" style={{ backgroundColor: bgColor }}>
@@ -12,7 +21,11 @@ const UserProfile = ({ channelName, subscribers, subscribed, img, videos, bgColo
                         <h1 className="text-xl font-bold">{channelName}</h1>
                         <span className="text-sm">{subscribers} subscribers</span>
                     </div>
-                    <div className="ml-0 md:ml-auto md:self-center">
+                    <div
+                        className={`ml-0 md:ml-auto md:self-center ${
+                            isLoggedUser ? 'invisible' : ''
+                        }`}
+                    >
                         <span className="tracking-wider text-red-600 font-bold uppercase cursor-pointer">
                             {subscribed ? 'Subscribed' : 'Subscribe'}
                         </span>

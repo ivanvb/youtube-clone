@@ -4,6 +4,7 @@ import LikeIcon from '../../icons/LikeIcon';
 import useFetch from '../../hooks/useFetch';
 import Loading from '../../components/Loading/index';
 import { getNetworkSpeed } from '../../util/index';
+import { useSelector } from 'react-redux';
 
 const networkSpeedMap = {
     '2g': 360,
@@ -19,6 +20,7 @@ const Video = (props) => {
     const [quality, setQuality] = useState(networkSpeed ? networkSpeedMap[networkSpeed] : 360);
     const [playingTime, setPlayingTime] = useState(0);
     const videoElement = useRef();
+    const user = useSelector((state) => state.user);
 
     const [video, videoIsLoading, videoError, videoUtils] = useFetch(
         `/api/get-video?id=${videoId}`
@@ -89,11 +91,26 @@ const Video = (props) => {
                     </div>
                     <div className="flex flex-wrap ml-auto text-sm">
                         <span className="ml-2 w-full">{video.views} Views</span>
-                        <span className="mx-2 flex align-baseline">
-                            <LikeIcon className="h-4 w-4 mt-1 mr-2" />
+                        <span className="mx-2 flex align-baseline cursor-pointer">
+                            <LikeIcon
+                                className="h-4 w-4 mt-1 mr-2"
+                                onClick={async (e) => {
+                                    fetch('/api/handle-likes', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                        },
+                                        body: JSON.stringify({
+                                            action: 'like',
+                                            user: user.data._id,
+                                            video: videoId,
+                                        }),
+                                    });
+                                }}
+                            />
                             {video.likes}
                         </span>
-                        <span className="mx-2 flex ml-4 lg:ml-auto text-sm">
+                        <span className="mx-2 flex ml-4 lg:ml-auto text-sm cursor-pointer">
                             <LikeIcon className="h-4 w-4 mt-1 mr-2 transform rotate-180" />
                             {video.dislikes}
                         </span>

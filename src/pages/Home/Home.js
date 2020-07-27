@@ -29,7 +29,6 @@ const Home = () => {
     let videos;
     if (data) {
         videos = data.videos.map((video) => {
-            console.log(video);
             return {
                 ...video,
                 className: 'mx-2 md:mx-0 mt-4',
