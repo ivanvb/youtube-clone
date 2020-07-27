@@ -55,3 +55,7 @@ export const getVideoDuration = (files) => {
 export const shuffleArray = (arr) => {
     return arr.sort(() => Math.random() - 0.5);
 };
+
+export const isFormInvalid = (form) => {
+    return !!Object.keys(form).find((key) => form[key] === '');
+};

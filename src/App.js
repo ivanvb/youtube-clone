@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import SignUp from './pages/SignUp/SignUp';
@@ -11,6 +11,7 @@ import Upload from './pages/Upload/Upload';
 import ChannelPage from './pages/ChannelPage/index';
 import { fetchUser } from './redux/user/user.actions';
 import Loading from './components/Loading/index';
+import ProgressBar from './components/ProgressBar/index';
 
 import { useSelector, useDispatch } from 'react-redux';
 
