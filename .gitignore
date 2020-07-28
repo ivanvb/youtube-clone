@@ -27,3 +27,5 @@ yarn-error.log*
 
 tailwind.full.css
 tailwind.build.css
+
+**/lambda/**

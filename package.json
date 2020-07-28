@@ -23,7 +23,10 @@
         "build": "yarn build:css && react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "now-build": "yarn build"
+        "now-build": "yarn build",
+        "lambda-serve": "netlify-lambda serve functions/routes",
+        "lambda-build": "netlify-lambda build functions/routes",
+        "dev": "netlify dev -f functions/routes"
     },
     "browserslist": {
         "production": [
@@ -41,5 +44,9 @@
     "devDependencies": {
         "autoprefixer": "^9.8.5",
         "postcss-cli": "^7.1.1"
-    }
+    },
+    "main": "index.js",
+    "repository": "https://github.com/ivb98/youtube-clone.git",
+    "author": "ivb98 <ivanvalette@hotmail.com>",
+    "license": "MIT"
 }

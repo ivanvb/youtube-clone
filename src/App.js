@@ -55,13 +55,16 @@ function App() {
         let token = window.localStorage.getItem('token');
         if (token !== 'undefined' && !!token) {
             dispatch(fetchUser(token));
-            setHasStartedFetching(true);
         }
+        setHasStartedFetching(true);
     }, []);
+
+    console.log(user.loading, hasStartedFetching);
 
     if (user.loading || !hasStartedFetching) {
         return <Loading />;
     } else {
+        console.log('??????');
         return isLogged ? <AppRouter /> : <LobbyRouter />;
     }
 }

@@ -30,14 +30,19 @@ export const userLogout = () => {
 export const fetchUser = (token) => {
     return async (dispatch) => {
         dispatch(userLoading());
+        console.log(token);
         const res = await fetch('/api/get-user-from-token', {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({ token }),
         });
         if (res.status !== 400) {
+            console.log('????');
             const data = await res.json();
+            console.log(data);
             dispatch(userSuccess(data));
+        } else {
+            console.log('madre mia');
         }
     };
 };
