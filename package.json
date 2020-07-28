@@ -20,7 +20,7 @@
         "build:css": "postcss src/css/tailwind/index.css -o src/css/tailwind/tailwind.build.css",
         "watch:css": "postcss src/css/tailwind/index.css -o src/css/tailwind/tailwind.build.css -w",
         "start": "react-scripts start",
-        "build": "lambda-build && yarn build:css && react-scripts build",
+        "build": "yarn lambda-build && yarn build:css && react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "now-build": "yarn build",
