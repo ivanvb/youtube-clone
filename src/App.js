@@ -55,8 +55,8 @@ function App() {
 		let token = window.localStorage.getItem('token');
 		if (token !== 'undefined' && !!token) {
 			dispatch(fetchUser(token));
-			setHasStartedFetching(true);
 		}
+		setHasStartedFetching(true);
 	}, []);
 
 	if (user.loading || !hasStartedFetching) {

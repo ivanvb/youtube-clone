@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { formatDuration, formatDate } from '../../util/index';
 import { useSelector } from 'react-redux';
+import DeleteIcon from '../../icons/DeleteIcon';
+import EditIcon from '../../icons/EditIcon';
 
 const FeedVideo = ({
     className,
@@ -48,7 +50,10 @@ const FeedVideo = ({
                 </div>
             </Link>
             {user.data.username === channelName && (
-                <div className="flex absolute right-0 top-0">
+                <div className="flex absolute right-0 top-0 ">
+                    <Link to={`/edit/${_id}`} className="mr-2">
+                        <EditIcon className="h-6 w-6" />
+                    </Link>
                     <button
                         onClick={() => {
                             fetch(`/api/delete-video?id=${_id}`, { method: 'DELETE' }).then(
@@ -56,9 +61,8 @@ const FeedVideo = ({
                             );
                         }}
                     >
-                        Delete
+                        <DeleteIcon className="h-6 w-6" />
                     </button>
-                    <Link to={`/edit/${_id}`}>Edit</Link>
                 </div>
             )}
         </div>
