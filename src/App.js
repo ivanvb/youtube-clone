@@ -16,54 +16,54 @@ import EditVideo from './pages/EditVideo/index';
 import { useSelector, useDispatch } from 'react-redux';
 
 const LobbyRouter = () => {
-    return (
-        <Router>
-            <Switch>
-                <Route path="/login" exact component={Login} />
-                <Route path="/signup" exact component={SignUp} />
-                <Redirect to={'/login'} />
-            </Switch>
-        </Router>
-    );
+	return (
+		<Router>
+			<Switch>
+				<Route path='/login' exact component={Login} />
+				<Route path='/signup' exact component={SignUp} />
+				<Redirect to={'/login'} />
+			</Switch>
+		</Router>
+	);
 };
 
 const AppRouter = () => {
-    return (
-        <Router>
-            <Layout>
-                <Switch>
-                    <Route path="/" exact component={Home} />
-                    <Route path="/profile" exact component={Profile} />
-                    <Route path="/video/:id" exact component={Video} />
-                    <Route path="/search" exact component={Search} />
-                    <Route path="/upload" exact component={Upload} />
-                    <Route path="/profile/:username" exact component={ChannelPage} />
-                    <Route path="/edit/:id" exact component={EditVideo} />
-                    <Redirect to={'/'} />
-                </Switch>
-            </Layout>
-        </Router>
-    );
+	return (
+		<Router>
+			<Layout>
+				<Switch>
+					<Route path='/' exact component={Home} />
+					<Route path='/profile' exact component={Profile} />
+					<Route path='/video/:id' exact component={Video} />
+					<Route path='/search' exact component={Search} />
+					<Route path='/upload' exact component={Upload} />
+					<Route path='/profile/:username' exact component={ChannelPage} />
+					<Route path='/edit/:id' exact component={EditVideo} />
+					<Redirect to={'/'} />
+				</Switch>
+			</Layout>
+		</Router>
+	);
 };
 function App() {
-    const user = useSelector((state) => state.user);
-    const dispatch = useDispatch();
-    const isLogged = Object.keys(user.data).length > 0;
-    const [hasStartedFetching, setHasStartedFetching] = useState(false);
+	const user = useSelector(state => state.user);
+	const dispatch = useDispatch();
+	const isLogged = Object.keys(user.data).length > 0;
+	const [hasStartedFetching, setHasStartedFetching] = useState(false);
 
-    useEffect(() => {
-        let token = window.localStorage.getItem('token');
-        if (token !== 'undefined' && !!token) {
-            dispatch(fetchUser(token));
-            setHasStartedFetching(true);
-        }
-    }, []);
+	useEffect(() => {
+		let token = window.localStorage.getItem('token');
+		if (token !== 'undefined' && !!token) {
+			dispatch(fetchUser(token));
+			setHasStartedFetching(true);
+		}
+	}, []);
 
-    if (user.loading || !hasStartedFetching) {
-        return <Loading />;
-    } else {
-        return isLogged ? <AppRouter /> : <LobbyRouter />;
-    }
+	if (user.loading || !hasStartedFetching) {
+		return <Loading />;
+	} else {
+		return isLogged ? <AppRouter /> : <LobbyRouter />;
+	}
 }
 
 export default App;
