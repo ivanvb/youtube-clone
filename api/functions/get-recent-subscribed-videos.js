@@ -10,24 +10,23 @@ const handleGet = async (req, res) => {
 	let lowerBound = higherBound - number;
 
 	const user = await User.findById(id);
-	const users = user.subscriptions.reverse();
-	let x = [];
+	const subscriptions = user.subscriptions.reverse();
+	const videosCount = [];
+	const videosInfo = [];
 
-	console.log('Initial users are:');
-	console.log(users);
+	for (let i = 0; i < subscriptions.length; i++) {
+		let users = await User.findById(subscriptions[i]);
+		videosCount.push(users.uploadedVideos.reverse());
+	}
+	console.log(videosCount);
 
-	users.forEach(async element => {
-		let user = await User.findById(element);
-		let videos = user.uploadedVideos.reverse();
-		console.log('videos for user are:');
-		console.log(videos);
-		videos.forEach(async element => {
-			x.push(await Video.findById(element));
-		});
-	});
-	console.log('after finding videos:');
-	console.log(x);
-	let result = x.sort(function (a, b) {
+	for (let i = 0; i < videosCount.length; i++) {
+		for (let j = 0; j < videosCount[i].length; j++) {
+			videosInfo.push(await Video.findById(videosCount[i][j]).populate('uploadingUser'));
+		}
+	}
+	console.log(videosInfo);
+	let result = videosInfo.sort(function (a, b) {
 		return new Date(b.uploadDate) - new Date(a.uploadDate);
 	});
 	console.log('after sorting:');

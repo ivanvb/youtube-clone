@@ -12,7 +12,8 @@ import ChannelPage from './pages/ChannelPage/index';
 import { fetchUser } from './redux/user/user.actions';
 import Loading from './components/Loading/index';
 import EditVideo from './pages/EditVideo/index';
-
+import Subscribed from './pages/Subscribed/Subscribed';
+import Liked from './pages/Liked/Liked';
 import { useSelector, useDispatch } from 'react-redux';
 
 const LobbyRouter = () => {
@@ -33,6 +34,8 @@ const AppRouter = () => {
 			<Layout>
 				<Switch>
 					<Route path='/' exact component={Home} />
+					<Route path='/likes' exact component={Liked} />
+					<Route path='/subscriptions' exact component={Subscribed} />
 					<Route path='/profile' exact component={Profile} />
 					<Route path='/video/:id' exact component={Video} />
 					<Route path='/search' exact component={Search} />
